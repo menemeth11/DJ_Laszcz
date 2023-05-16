@@ -6,15 +6,34 @@ load_dotenv() # load all the variables from the env file
 
 bot = discord.Bot(intents=discord.Intents.all()) #nawiasy dają dostęp do eventow discorda
 
-@bot.event
-async def on_ready():
-    print(f"{bot.user} is ready and online!")
 
-@bot.event #nowy członek dostaje pw 
+#------------------------------------------------------------------------#
+
+@bot.event #Sends a message to console on start
+async def on_ready():
+    print(f"{bot.user} starts the party!")
+    print("Version: Pre-alpha 0.1")
+
+#------------------------------------------------------------------------#
+
+
+
+@bot.event #New user gets a pm upon joining server 
 async def on_member_join(member):
     await member.send(
-        f'Welcome to the server, {member.mention}! Enjoy your stay here.'
+        f'Welcome to the **{member.guild.name}**, {member.mention}! I believe you have a strong mind :D'
     )
+
+# @bot.event   you can't send messages without a shared server
+# async def on_member_remove(member):
+#     await member.send(
+#         f'You are so disgustingly weak {member.mention}. Never go back to {member.guild.name}! Tfu!'
+#     )
+
+#------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------#
+
 
 @bot.command() #pisze o grze i czeka na odpowiedź
 async def gtn(ctx):
